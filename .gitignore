@@ -4,3 +4,4 @@ public
 typings
 typings.json
 .vscode
+server/config/index.js
