@@ -1,0 +1,15 @@
+.cardTitle {
+  @import 'fix-avatar-size';
+
+  flex-grow: 1;
+  &.large {
+  .title {
+    font-size: 1.4rem;
+  }
+
+  .subtitle {
+    line-height: 1.25;
+    font-size: 1.4rem;
+  }
+  }
+}
