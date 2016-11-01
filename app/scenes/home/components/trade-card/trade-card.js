@@ -43,8 +43,6 @@ class TradeCard extends Component {
     loadBooks(userId)
   }
   onBookSelect(book) {
-    console.log('book', book)
-
     const {trade, saveTrade} = this.props
     const newTrade = {
       ...trade,

@@ -13,8 +13,7 @@ const TradeCompletedCard = ({trade, user}) =>
   <div>
     <CardText>
       <p>
-        Traded {trade.fromBook.title} for {trade.toBook.title} with
-         {trade.from._id === user._id ? trade.to.username : trade.from.username}
+        Traded {trade.fromBook.title} for {trade.toBook.title} with {trade.from._id === user._id ? trade.to.username : trade.from.username}
       </p>
     </CardText>
   </div>

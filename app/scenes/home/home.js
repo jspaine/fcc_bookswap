@@ -48,7 +48,6 @@ class Home extends React.Component {
   }
   render() {
     const {user, books, trades, createTrade, pushState} = this.props
-    // console.log('user, books, trades', user, books, trades)
     let listActions = []
     let closeBooks, otherBooks
     if (user) {
@@ -95,13 +94,13 @@ class Home extends React.Component {
               </Card>
             }
             <Card theme={cardMargin}>
-              <CardTitle title="All books" />
+              <CardTitle title="Other books" />
               {otherBooks && otherBooks.length > 0 &&
                 <BookList books={otherBooks} user={user} actions={listActions} />}
             </Card>
           </div> :
           <Card theme={cardMargin}>
-            <h5>All Books</h5>
+            <CardTitle title="All Books" />
             <BookList books={books} user={user} actions={listActions} />
           </Card>
         }

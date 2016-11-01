@@ -33,7 +33,6 @@ export default new class {
     return Observable.fromPromise(
       fetch(`${prefix}${path}${query}`, params)
         .then(res => {
-          console.log('requested', method, `${prefix}${path}${query}`)
           if (!res.ok) throw res
           if (params.headers &&
               params.headers['Accept'] === 'application/json') {

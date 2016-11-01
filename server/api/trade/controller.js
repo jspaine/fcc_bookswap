@@ -24,10 +24,6 @@ export default {
       })
         .populate('from to fromBook toBook')
     }
-    // if (!res.length) {
-    //   return ctx.status = 404
-    // }
-    // console.log('res', res)
 
     ctx.body = await Trade.populate(res, 'from to fromBook toBook')
   },

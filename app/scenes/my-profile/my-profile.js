@@ -43,8 +43,6 @@ class MyProfile extends React.Component {
     }
   }
   handleCountryChange(value) {
-    console.log('value', value)
-
     this.setState({country: value || ''})
   }
   render() {
@@ -63,7 +61,6 @@ class MyProfile extends React.Component {
                 label="Country"
                 source={countries}
                 multiple={false}
-                onKeyDown={ev => console.log(ev)}
                 value={this.state.country}
                 hint={countries[this.state.country]}
                 error={this.state.error}
