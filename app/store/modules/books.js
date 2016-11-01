@@ -3,7 +3,7 @@ import {denormalize} from 'denormalizr'
 
 import api from 'lib/api'
 import * as schema from 'store/schema'
-import {SAVE_TRADE_SUCCESS} from './trades'
+
 const LOAD_BOOKS_REQUEST = 'books/LOAD_BOOKS_REQUEST'
 export const LOAD_BOOKS_SUCCESS = 'books/LOAD_BOOKS_SUCCESS'
 const LOAD_BOOKS_FAILURE = 'books/LOAD_BOOKS_FAILURE'

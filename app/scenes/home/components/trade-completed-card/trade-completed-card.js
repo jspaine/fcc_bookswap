@@ -12,11 +12,11 @@ const dispatchToProps = dispatch => ({
 const TradeCompletedCard = ({trade, user}) =>
   <div>
     <CardText>
-      Traded {trade.fromBook.title} for {trade.toBook.title} with {trade.from._id === user._id ? trade.to.username : trade.from.username}
+      <p>
+        Traded {trade.fromBook.title} for {trade.toBook.title} with
+         {trade.from._id === user._id ? trade.to.username : trade.from.username}
+      </p>
     </CardText>
-    <CardActions>
-
-    </CardActions>
   </div>
 
 export default TradeCompletedCard

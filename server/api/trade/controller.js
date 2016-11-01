@@ -16,7 +16,6 @@ export default {
         throw err
       }
     } else {
-      console.log('finding trades for user', ctx.state.user._id)
       res = await Trade.find({
         '$or': [
           {from: ctx.state.user._id},
@@ -25,24 +24,12 @@ export default {
       })
         .populate('from to fromBook toBook')
     }
-    if (!res.length) {
-      return ctx.status = 404
-    }
-    console.log('res', res)
+    // if (!res.length) {
+    //   return ctx.status = 404
+    // }
+    // console.log('res', res)
 
     ctx.body = await Trade.populate(res, 'from to fromBook toBook')
-  },
-
-  show: async (ctx) => {
-    if (ownOrAdmin(ctx.params, ctx.state.user)) {
-      const user = await User.findOne({ _id: ctx.params.id })
-      if (!user) {
-        return ctx.status = 404
-      }
-      ctx.body = user
-    } else {
-      ctx.status = 403
-    }
   },
 
   create: async (ctx) => {
@@ -81,8 +68,8 @@ export default {
   delete: async (ctx) => {
     const trade = await Trade.findById(ctx.params.id)
     const {user} = ctx.state
-    if (!user.role === 'admin' || !trade.from === user._id || !trade.to === user._id) {
-      ctx.status = 403
+    if (user.role !== 'admin' || trade.from !== user._id || trade.to !== user._id) {
+      return ctx.status = 403
     }
     ctx.body = await Trade.findOneAndRemove({_id: trade._id})
   }

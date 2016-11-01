@@ -4,12 +4,13 @@ import {Button} from 'react-toolbox/lib/button'
 
 import truncate from 'lib/truncate'
 import smallCardTitle from 'theme/small-card-title.scss'
+import cardMargin from 'theme/card-margin.scss'
 
 const BookCard = ({small, book, actions}) =>
   <Card
+    theme={cardMargin}
     style={{
-      maxWidth: `${small ? '150px' : '200px'}`,
-      margin: '1rem',
+      width: `${small ? '150px' : '200px'}`,
       justifyContent: 'space-around'
     }}
   >
@@ -28,12 +29,17 @@ const BookCard = ({small, book, actions}) =>
         />
       </CardMedia>
     }
-    <CardTitle
-      theme={smallCardTitle}
-      avatar={book.owner && !small ? book.owner.image : null}
-      title={truncate(book.title, 30)}
-      subtitle={!small && truncate(book.subtitle, 30) || ''}
-    />
+    <CardText>
+      <p>{book.title}</p>
+      <p>{truncate(book.subtitle, 30)}</p>
+    </CardText>
+    {book.owner && !small &&
+      <CardTitle
+        theme={smallCardTitle}
+        avatar={book.owner.image}
+        title={book.owner.username}
+      />
+    }
     {actions &&
       <CardActions>
         {actions.map(action =>

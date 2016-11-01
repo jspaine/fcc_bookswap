@@ -8,16 +8,16 @@ const BookList = ({small, books, user, actions}) =>
     flexWrap: 'wrap',
     justifyContent: 'center'
   }}>
-      {books.filter(book => !user || book.owner._id !== user._id)
-        .map(book =>
-          <BookCard
-            small={small}
-            key={bookId(book)}
-            book={book}
-            actions={actions}
-          />
-        )
-      }
+    {books.filter(book => !user || book.owner._id !== user._id)
+      .map(book =>
+        <BookCard
+          small={small}
+          key={bookId(book)}
+          book={book}
+          actions={actions}
+        />
+      )
+    }
   </div>
 
 export default BookList

@@ -2,15 +2,18 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {push} from 'react-router-redux'
 import {Button} from 'react-toolbox/lib/button'
+import {Card, CardTitle, CardMedia, CardText, CardActions} from 'react-toolbox/lib/card'
 
 import {selectors} from 'store/modules'
 import {loadUsersRequest} from 'store/modules/users'
 import {loadBooksRequest} from 'store/modules/books'
 import {loadTradesRequest, saveTradeRequest} from 'store/modules/trades'
-import {TradeList, BookList} from 'components'
+import {BookList} from 'components'
+import {TradeList} from 'scenes/home/components'
 import {countries} from 'lib/countries'
 
 import style from './home.scss'
+import cardMargin from 'theme/card-margin.scss'
 
 const stateToProps = state => ({
   userId: selectors.getUserId(state),
@@ -65,24 +68,32 @@ class Home extends React.Component {
     return (
       <div>
         {user &&
-          <div>
-            <h5>Trades</h5>
-            <TradeList trades={trades} user={user}/>
-          </div>
+          <Card theme={cardMargin} >
+            <CardTitle title="Trades" />
+            <CardText>
+              {trades && trades.length > 0 ?
+                <TradeList trades={trades} user={user}/> :
+                'You don\'t have any trades yet'
+              }
+            </CardText>
+          </Card>
         }
         {user ?
           <div>
-            <h5>Books in {countries[user.country]}</h5>
+          <Card theme={cardMargin} >
+            <CardTitle title={`Books in ${countries[user.country]}`} />
             {closeBooks && <BookList books={closeBooks} user={user} actions={listActions} />}
-
-            <h5>All Books</h5>
+          </Card>
+          <Card theme={cardMargin} >
+            <CardTitle title="All books" />
             {otherBooks && otherBooks.length > 0 &&
               <BookList books={otherBooks} user={user} actions={listActions} />}
+          </Card>
           </div> :
-          <div>
+          <Card theme={cardMargin} >
             <h5>All Books</h5>
             <BookList books={books} user={user} actions={listActions} />
-          </div>
+          </Card>
         }
       </div>
     )

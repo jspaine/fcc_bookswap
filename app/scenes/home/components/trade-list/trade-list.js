@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {TradeCard} from 'components'
+import {TradeCard} from 'scenes/home/components'
 
 const TradeList = ({trades, user}) =>
   <div style={{

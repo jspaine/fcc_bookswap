@@ -10,11 +10,12 @@ import {
   TradeCompletedCard,
   TradeOfferCard,
   TradeRequestCard
-} from 'components'
+} from 'scenes/home/components'
 import {loadBooksRequest} from 'store/modules/books'
 import {saveTradeRequest} from 'store/modules/trades'
 import {selectors} from 'store/modules'
 import smallTitle from 'theme/small-card-title.scss'
+import cardMargin from 'theme/card-margin.scss'
 
 const stateToProps = state => ({
   books: userId => selectors.getBooksByUserId(userId, state)
@@ -72,9 +73,10 @@ class TradeCard extends Component {
     }
 
     return (
-      <Card style={{
-        maxWidth: '250px',
-        margin: '1rem',
+      <Card
+      theme={cardMargin}
+      style={{
+        width: '250px',
         justifyContent: 'space-around'
       }}>
         {this.state.showBooks &&
