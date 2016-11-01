@@ -27,8 +27,7 @@ const dispatchToProps = dispatch => ({
   loadBooks: (location) => dispatch(loadBooksRequest({country: location})),
   loadTrades: () => dispatch(loadTradesRequest()),
   createTrade: (book) => dispatch(saveTradeRequest({toBook: book})),
-  pushState: (path) => dispatch(push(path)),
-  dispatch
+  pushState: (path) => dispatch(push(path))
 })
 
 class Home extends React.Component {
@@ -48,7 +47,7 @@ class Home extends React.Component {
     }
   }
   render() {
-    const {user, books, trades, createTrade} = this.props
+    const {user, books, trades, createTrade, pushState} = this.props
     // console.log('user, books, trades', user, books, trades)
     let listActions = []
     let closeBooks, otherBooks
@@ -68,11 +67,11 @@ class Home extends React.Component {
     return (
       <div>
         {user &&
-          <Card theme={cardMargin} >
+          <Card theme={cardMargin}>
             <CardTitle title="Trades" />
             <CardText>
               {trades && trades.length > 0 ?
-                <TradeList trades={trades} user={user}/> :
+                <TradeList trades={trades} user={user} /> :
                 'You don\'t have any trades yet'
               }
             </CardText>
@@ -80,17 +79,28 @@ class Home extends React.Component {
         }
         {user ?
           <div>
-          <Card theme={cardMargin} >
-            <CardTitle title={`Books in ${countries[user.country]}`} />
-            {closeBooks && <BookList books={closeBooks} user={user} actions={listActions} />}
-          </Card>
-          <Card theme={cardMargin} >
-            <CardTitle title="All books" />
-            {otherBooks && otherBooks.length > 0 &&
-              <BookList books={otherBooks} user={user} actions={listActions} />}
-          </Card>
+            {user.country ?
+              <Card theme={cardMargin}>
+                <CardTitle title={`Books in ${countries[user.country]}`} />
+                {closeBooks && <BookList books={closeBooks} user={user} actions={listActions} />}
+              </Card> :
+              <Card theme={cardMargin}>
+                <CardText>
+                  <Button
+                    label="Set your country"
+                    onClick={() => pushState('profile')}
+                  />
+                  to see books in your area
+                </CardText>
+              </Card>
+            }
+            <Card theme={cardMargin}>
+              <CardTitle title="All books" />
+              {otherBooks && otherBooks.length > 0 &&
+                <BookList books={otherBooks} user={user} actions={listActions} />}
+            </Card>
           </div> :
-          <Card theme={cardMargin} >
+          <Card theme={cardMargin}>
             <h5>All Books</h5>
             <BookList books={books} user={user} actions={listActions} />
           </Card>
